@@ -13,14 +13,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签云及分类">
-<meta property="og:url" content="http://JKwangeleven.github.io/tags/index.html">
+<meta name="description" content="Java中的String不变性主要是由于创建新字符串时，先查看字符串池中是否存在，如果存在直接返回该字符串的引用，否则在字符串池中创建，并返回该引用。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中String的不变性">
+<meta property="og:url" content="http://JKwangeleven.github.io/JAVA基础/Java中String的不变性/index.html">
 <meta property="og:site_name" content="JKwangeleven的博客">
+<meta property="og:description" content="Java中的String不变性主要是由于创建新字符串时，先查看字符串池中是否存在，如果存在直接返回该字符串的引用，否则在字符串池中创建，并返回该引用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-27T06:57:56.000Z">
+<meta property="og:image" content="http://p7vovp031.bkt.clouddn.com/15258492575456.jpg">
+<meta property="og:image" content="http://p7vovp031.bkt.clouddn.com/15258501163299.jpg">
+<meta property="og:image" content="http://p7vovp031.bkt.clouddn.com/15258519486092.jpg">
+<meta property="og:updated_time" content="2018-05-11T02:33:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签云及分类">
+<meta name="twitter:title" content="Java中String的不变性">
+<meta name="twitter:description" content="Java中的String不变性主要是由于创建新字符串时，先查看字符串池中是否存在，如果存在直接返回该字符串的引用，否则在字符串池中创建，并返回该引用。">
+<meta name="twitter:image" content="http://p7vovp031.bkt.clouddn.com/15258492575456.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -52,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>标签云及分类 | JKwangeleven的博客</title>
+<title>Java中String的不变性 | JKwangeleven的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,7 +70,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -257,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java中String的不变性" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/tags/index.html" class="article-date">
-      <time datetime="2018-04-26T12:34:54.000Z" itemprop="datePublished">2018-04-26</time>
+      <a href="/JAVA基础/Java中String的不变性/" class="article-date">
+      <time datetime="2018-04-27T02:52:40.000Z" itemprop="datePublished">2018-04-27</time>
 </a>
     </div>
   
@@ -272,13 +280,17 @@
     
       <header class="article-header">
         <h1 class="article-title" itemprop="name">
-      标签云及分类
+      Java中String的不变性
     </h1>
       </header>
       
       <div class="article-info article-info-post">
-        
-        
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
         <div class="clearfix"></div>
       </div>
       
@@ -286,94 +298,110 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <h2 id="String不变性的表现"><a href="#String不变性的表现" class="headerlink" title="String不变性的表现"></a>String不变性的表现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">    String str2 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">    String str3 = <span class="string">"abc"</span>;</span><br><span class="line">    String str4 = <span class="string">"abc"</span>;</span><br><span class="line">    <span class="comment">// ①str1 == str2 :false </span></span><br><span class="line">    System.out.println(<span class="string">"str1 == str2 : "</span> + (str1 == str2));</span><br><span class="line">    <span class="comment">// ②str3 == str4 :true</span></span><br><span class="line">    System.out.println(<span class="string">"str3 == str4 : "</span> + (str3 == str4));</span><br><span class="line">    <span class="comment">// ③str1 == str3 :false</span></span><br><span class="line">    System.out.println(<span class="string">"str1 == str3 : "</span> + (str1 == str3));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在java中<code>==</code>比较的是两个对象的地址，①、③中等号左右两边是两个不同的对象，地址也不同，返回false。</li>
+<li>②中返回结果为true，说明等号左右两边对象的地址相同，这正是String的不变性导致的。</li>
+</ul>
+<h2 id="String不变性的原因"><a href="#String不变性的原因" class="headerlink" title="String不变性的原因"></a>String不变性的原因</h2><p><strong><code>str3</code>创建过程如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str3 = <span class="string">"abc"</span></span><br></pre></td></tr></table></figure>
+ <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258492575456.jpg" alt="str3的创建"><br> </div>
 
+<p>此时<code>str3</code>中保存了”abc”这个对象的引用。</p>
+<hr>
 
-    <!-- Tag Cloud Page -->
-    <hr>
-<br>
-<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">5</span></li></ul>
+<p><strong><code>str4</code>创建过程如下:</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str4 = <span class="string">"abc"</span></span><br></pre></td></tr></table></figure></p>
+<p>创建<code>str4</code>时会先到字符串常量池中找是否存在字符串为<code>&quot;abc&quot;</code>的字符串，如果字符串常量池中存在”abc”，则str4保存之前创建的字符串<code>&quot;abc&quot;</code>的引用，此时<code>str4</code>保存的引用和<code>str3</code>是同一个引用，地址相同。</p>
+ <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258501163299.jpg" alt="str4的创建"><br> </div>
 
-<p class="count"></p>
+<p><hr><br><strong>字符串的链接</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str4 = str4.concat(<span class="string">"def"</span>);</span><br></pre></td></tr></table></figure>
+ <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258519486092.jpg" alt="字符串的链接"><br> </div>
 
-<div class="tags">
-    <a href="/tags/Java/" style="font-size: 35px; color: #000">Java</a> <a href="/tags/源码解读/" style="font-size: 16px; color: #808080">源码解读</a>
-</div>
-<style>
-    .category-list li{
-        display: inline-block;
-        margin: 0 1em .5em 0;
-        padding: 4px;
-        border: 1px solid lightgray;
-        font-size: 1.2rem;
-    }
-    .category-list a { color: gray; }
-    .category-list-item:hover a {
-        color: gray;
-        text-decoration: none;
-    }
-    .category-list-count {
-        margin-left: 2px;
-        font-size: .9rem;
-    }
-    .article-entry ul li:before{ display: none; }
-    .article-inner { text-align: center; }
-    .tags {
-        max-width: 42em;
-        margin: 2em auto;
-        margin-top: 0em;
-    }
-    .tags a {
-        margin-right: 1em;
-        line-height: 65px;
-        border-bottom: 1px solid gray;
-        white-space: nowrap;
-        transition: border-bottom .5s;
-    }
-    .tags a:hover {
-        border-bottom: 3px dotted gray;
-        text-decoration: none;
-    }
-    #count > span {
-        margin: auto .2em;
-        font-weight: bold;
-    }
-</style>
-
-<!-- Count tags and categories -->
-<p id="count">
-        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
-        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
-</p>
-<script>
-    $('#count').appendTo('.count');
-</script>
-          
-        
+<p>当<code>str4</code>后面链接<code>&quot;def&quot;</code>时，查找字符串常量池中没有字符串<code>&quot;abcdef&quot;</code>，在字符串常量池中重新创建一个字符串<code>&quot;abcdef&quot;</code>, <code>str4</code>保存<code>&quot;abcdef&quot;</code>的引用。</p>
+<h2 id="Java中的String为什么设计成不变的？"><a href="#Java中的String为什么设计成不变的？" class="headerlink" title="Java中的String为什么设计成不变的？"></a>Java中的String为什么设计成不变的？</h2><ul>
+<li style="list-style: none"><input type="checkbox"> 写一篇博客详细介绍为什么这么设计</li>
+<li style="list-style: none"><input type="checkbox"> 写一篇博客详细介绍底层怎么实现不变性的</li>
+<li style="list-style: none"><input type="checkbox"> 补充有关不变性的面试题</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>String的创建及修改过程如下:</p>
+<ol>
+<li>在字符串常量池中查找是否存在需要创建的字符串</li>
+<li>如果存在，直接返回字符串的引用</li>
+<li>如果不存在，在字符串常量池中创建新的字符串</li>
+</ol>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><font color="red" size="4">注意:</font></p>
+<ol>
+<li>String中不存在修改字符串值的方法，所有的所谓的修改字符串值的方法都走一遍上面的创建或修改流程</li>
+<li>由于修改String的值，存在着创建新的对象的可能性，会带来GC的压力，因而如果需要频繁修改字符串值的操作，尽量使用StringBuilder或StringBuffer</li>
+</ol>
+</blockquote>
       
     </div>
     
   </div>
   
-    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/JAVA基础/Java中String的不变性/">Java中String的不变性</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">JKwangeleven</a></p>
+        <p><span>发布时间:</span>2018-04-27, 10:52:40</p>
+        <p><span>最后更新:</span>2018-05-11, 10:33:42</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/JAVA基础/Java中String的不变性/" title="Java中String的不变性">http://JKwangeleven.github.io/JAVA基础/Java中String的不变性/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://JKwangeleven.github.io/JAVA基础/Java中String的不变性/　　作者: JKwangeleven" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/JAVA基础/Java中String为什么设计成不变的？/">
+                    Java中String为什么设计成不可变的？
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/JAVA基础/JAVA基础-String/">
+                    JAVA基础--String
+                </a>
+            </div>
+        
+    </nav>
   
 </article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String不变性的表现"><span class="toc-number">1.</span> <span class="toc-text">String不变性的表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String不变性的原因"><span class="toc-number">2.</span> <span class="toc-text">String不变性的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的String为什么设计成不变的？"><span class="toc-number">3.</span> <span class="toc-text">Java中的String为什么设计成不变的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
 
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
     <div class="share">
@@ -389,7 +417,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"标签云及分类　| JKwangeleven的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java中String的不变性　| JKwangeleven的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -398,8 +426,36 @@
 
 
 
+    
+        <!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Java中String的不变性"></div>
+<script type="text/javascript">
+(function(){
+var appid = 'cytCdW7jV';
+var conf = 'prod_1d03246148efa0047e15e84cb3c26a79';
+var width = window.innerWidth || document.documentElement.clientWidth;
+if (width < 960) {
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+    
 
 
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/JAVA基础/Java中String为什么设计成不变的？/" title="上一篇: Java中String为什么设计成不可变的？">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/JAVA基础/JAVA基础-String/" title="下一篇: JAVA基础--String">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/源码解读-String/">源码解读-String</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中如何设计不可变的类？/">Java中如何设计不可变的类？</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中String为什么设计成不变的？/">Java中String为什么设计成不可变的？</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中String的不变性/">Java中String的不变性</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/JAVA基础-String/">JAVA基础--String</a></li></ul>
 
 
     <script>

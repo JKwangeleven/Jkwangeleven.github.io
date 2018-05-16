@@ -13,18 +13,18 @@
 
 
 
-<meta name="description" content="12345public class Test&amp;#123;  public static void main(String[] args)&amp;#123;    System.out.println(&quot;haha&quot;);  &amp;#125;&amp;#125;">
-<meta name="keywords" content="JAVA">
+<meta name="description" content="Java中String被设计成不变性主要考虑字符串池（效率）、安全性、hashcode、缓存等方面。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA基础--String">
-<meta property="og:url" content="http://JKwangeleven.github.io/2018/04/27/JAVA基础-String/index.html">
+<meta property="og:title" content="Java中String为什么设计成不可变的？">
+<meta property="og:url" content="http://JKwangeleven.github.io/JAVA基础/Java中String为什么设计成不变的？/index.html">
 <meta property="og:site_name" content="JKwangeleven的博客">
-<meta property="og:description" content="12345public class Test&amp;#123;  public static void main(String[] args)&amp;#123;    System.out.println(&quot;haha&quot;);  &amp;#125;&amp;#125;">
+<meta property="og:description" content="Java中String被设计成不变性主要考虑字符串池（效率）、安全性、hashcode、缓存等方面。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-27T14:48:05.000Z">
+<meta property="og:updated_time" content="2018-05-14T04:19:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA基础--String">
-<meta name="twitter:description" content="12345public class Test&amp;#123;  public static void main(String[] args)&amp;#123;    System.out.println(&quot;haha&quot;);  &amp;#125;&amp;#125;">
+<meta name="twitter:title" content="Java中String为什么设计成不可变的？">
+<meta name="twitter:description" content="Java中String被设计成不变性主要考虑字符串池（效率）、安全性、hashcode、缓存等方面。">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JAVA基础--String | JKwangeleven的博客</title>
+<title>Java中String为什么设计成不可变的？ | JKwangeleven的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -188,7 +188,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码解读/">源码解读</a></li></ul>
                     </div>
                 </section>
                 
@@ -200,8 +200,6 @@
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
                     
                     </div>
                 </section>
@@ -263,11 +261,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-JAVA基础-String" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java中String为什么设计成不变的？" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/04/27/JAVA基础-String/" class="article-date">
-      <time datetime="2018-04-27T02:50:40.000Z" itemprop="datePublished">2018-04-27</time>
+      <a href="/JAVA基础/Java中String为什么设计成不变的？/" class="article-date">
+      <time datetime="2018-04-28T03:32:22.000Z" itemprop="datePublished">2018-04-28</time>
 </a>
     </div>
   
@@ -278,7 +276,7 @@
     
       <header class="article-header">
         <h1 class="article-title" itemprop="name">
-      JAVA基础--String
+      Java中String为什么设计成不可变的？
     </h1>
       </header>
       
@@ -287,7 +285,7 @@
     <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
     </div>
         <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
         <div class="clearfix"></div>
       </div>
@@ -296,32 +294,96 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"haha"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>String的不变性(<code>Immutable</code>)具体表现及原理可以点击<a href="/JAVA基础/Java中String的不变性">这里</a>。</p>
+<blockquote>
+<p>JDK中将String设计成不变(<code>Immutable</code>)的，是工程经验的精华，具体原因主要考虑一下几点：</p>
+<ol>
+<li>字符串常量池的需要</li>
+<li>线程安全角度考虑</li>
+<li>类加载时根据类的名称加载，不变性以便保证类被正确加载</li>
+<li>支持hashcode及缓存</li>
+</ol>
+</blockquote>
+<h3 id="1-字符串常量池的需要"><a href="#1-字符串常量池的需要" class="headerlink" title="1. 字符串常量池的需要"></a>1. 字符串常量池的需要</h3><p>字符串是应用程序中最为常用的类型，JVM为了提高性能和减少内存开销，提出了字符串常量池的概念。<br>字符串常量池类似于缓存区。当创建字符串常量时，首先检查常量池中是否存在改字符串，若存在直接返回该字符串的引用，如果不存在，实例化该字符串并放到字符串常量池中。</p>
+<blockquote>
+<p>实现字符串常量池的<code>基础</code>就要求<code>字符串是不可变的</code>，否则会数据冲突。（str1，与str2的字面量形同，则保存的引用是同一个，如果是可变的，str1的值变化会影响str2的值）<br><br></p>
+</blockquote>
+<h3 id="2-线程安全的考虑"><a href="#2-线程安全的考虑" class="headerlink" title="2. 线程安全的考虑"></a>2. 线程安全的考虑</h3><p>字符串常常被多个线程进行共享，如果字符串可变，那么多个线程在调用过程中可能存在线程安全问题.<br>为了解决这个问题，就需要进行线程同步，降低了效率。而字符串是不可变时，天然的具有线程安全的特性。<br><br></p>
+<h3 id="3-类加载时根据类的名称加载，不变性以便保证类被正确加载"><a href="#3-类加载时根据类的名称加载，不变性以便保证类被正确加载" class="headerlink" title="3. 类加载时根据类的名称加载，不变性以便保证类被正确加载"></a>3. 类加载时根据类的名称加载，不变性以便保证类被正确加载</h3><p>类加载器在加载某个类（如<code>java.lang.String</code>），是根据类的全名进行查找及加载，如果这个字符串的值改变了，那么将不能正确的加载到所需要的类。<br><br></p>
+<h3 id="4-HashCode缓存"><a href="#4-HashCode缓存" class="headerlink" title="4. HashCode缓存"></a>4. HashCode缓存</h3><p>在HashMap和HashSet数据结构中，String常用语key值.<br>String的不变性避免了hash冲突（而且也避免了空指针引用），避免了每次重新计算hashcode的成本，提升程序性能。如果String是可变的，如果HashMap中的key为String时，这个String的值变了，则在HashMap中查找发现不存在这个key的对象。</p>
+<blockquote>
+<p>String的源码有如下的片段,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache the hash code for the string */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">// Default to 0</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>String被设计成不变的，主要从提升效率及安全性两个反面考虑</p>
+<ol>
+<li>将String设计成不变的，这样可以将字符串缓存起来，在用到的时候直接取出，避免重复创建或重新计算</li>
+<li>String作为最常用的类型，在多线程、类启动、服务通信等都作为最基础的组成，如果在运行时字符串发生了改变将带来众多安全问题。</li>
+</ol>
+</blockquote>
+<p><hr></p>
+<blockquote>
+<font color="#F08080" size="5">不可变类的优缺点</font><br><font color="#4682B4" size="5">优点</font>
+
+<ol>
+<li>构造、测试、使用简单，不可变对象只有一种状态，即创建时的状态</li>
+<li>不可变对象本质是线程安全的，不需要同步处理</li>
+<li>当用作类的属性时，不需要保护性拷贝</li>
+<li>可以大胆的用作Map或Set的元素</li>
+</ol>
+<font color="#4682B4" size="5">缺点</font>
+
+<p>如果对String对象的值有大量的修改需求，将会创建大量的String对象，占用更多的heap空间</p>
+</blockquote>
+<p><hr></p>
+<blockquote>
+<p><strong>tips:</strong><br>Java中不可变的类有:<code>String</code>、 <code>基本类型的包装类</code>、<code>BigInteger</code>（class没被final修饰）、<code>BigDecimal</code>（class没被final修饰）</p>
+</blockquote>
+<p>Java中如何设计不可变的类？可以点击<a href="/JAVA基础/Java中如何设计不可变的类？">这里</a></p>
       
     </div>
     
   </div>
   
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/04/27/JAVA基础-String/">JAVA基础--String</a></p>
+        <p><span>本文标题:</span><a href="/JAVA基础/Java中String为什么设计成不变的？/">Java中String为什么设计成不可变的？</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">JKwangeleven</a></p>
-        <p><span>发布时间:</span>2018-04-27, 10:50:40</p>
-        <p><span>最后更新:</span>2018-04-27, 22:48:05</p>
+        <p><span>发布时间:</span>2018-04-28, 11:32:22</p>
+        <p><span>最后更新:</span>2018-05-14, 12:19:06</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/04/27/JAVA基础-String/" title="JAVA基础--String">http://JKwangeleven.github.io/2018/04/27/JAVA基础-String/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://JKwangeleven.github.io/2018/04/27/JAVA基础-String/　　作者: JKwangeleven" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/JAVA基础/Java中String为什么设计成不变的？/" title="Java中String为什么设计成不可变的？">http://JKwangeleven.github.io/JAVA基础/Java中String为什么设计成不变的？/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://JKwangeleven.github.io/JAVA基础/Java中String为什么设计成不变的？/　　作者: JKwangeleven" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/JAVA基础/Java中如何设计不可变的类？/">
+                    Java中如何设计不可变的类？
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/JAVA基础/Java中String的不变性/">
+                    Java中String的不变性
+                </a>
+            </div>
+        
+    </nav>
   
 </article>
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-字符串常量池的需要"><span class="toc-number">1.</span> <span class="toc-text">1. 字符串常量池的需要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-线程安全的考虑"><span class="toc-number">2.</span> <span class="toc-text">2. 线程安全的考虑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-类加载时根据类的名称加载，不变性以便保证类被正确加载"><span class="toc-number">3.</span> <span class="toc-text">3. 类加载时根据类的名称加载，不变性以便保证类被正确加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-HashCode缓存"><span class="toc-number">4.</span> <span class="toc-text">4. HashCode缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -329,8 +391,8 @@
         .left-col .switch-area {
             display: none;
         }
-        .toc-level-3 i,
-        .toc-level-3 ol {
+        .toc-level-4 i,
+        .toc-level-4 ol {
             display: none !important;
         }
     </style>
@@ -355,7 +417,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JAVA基础--String　| JKwangeleven的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java中String为什么设计成不可变的？　| JKwangeleven的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -365,38 +427,35 @@
 
 
     
-      <div class="duoshuo" id="comments">
-    <div id="comment-box"></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2018/04/27/JAVA基础-String/" data-title="JAVA基础--String" data-url="http://JKwangeleven.github.io/2018/04/27/JAVA基础-String/"></div>
-    <script>
-        var duoshuoQuery = {short_name:""};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
-
-        
-    </script>
-    <script> loadComment(); </script>
-</div>
+        <!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="Java中String为什么设计成不可变的？"></div>
+<script type="text/javascript">
+(function(){
+var appid = 'cytCdW7jV';
+var conf = 'prod_1d03246148efa0047e15e84cb3c26a79';
+var width = window.innerWidth || document.documentElement.clientWidth;
+if (width < 960) {
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
     
 
 
 <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/JAVA基础/Java中如何设计不可变的类？/" title="上一篇: Java中如何设计不可变的类？">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/JAVA基础/Java中String的不变性/" title="下一篇: Java中String的不变性">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/27/JAVA基础-String/">JAVA基础--String</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/源码解读-String/">源码解读-String</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中如何设计不可变的类？/">Java中如何设计不可变的类？</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中String为什么设计成不变的？/">Java中String为什么设计成不可变的？</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/Java中String的不变性/">Java中String的不变性</a></li><li class="post-list-item"><a class="post-list-link" href="/JAVA基础/JAVA基础-String/">JAVA基础--String</a></li></ul>
 
 
     <script>

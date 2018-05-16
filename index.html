@@ -188,7 +188,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码解读/">源码解读</a></li></ul>
                     </div>
                 </section>
                 
@@ -200,8 +200,6 @@
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
                     
                     </div>
                 </section>
@@ -263,24 +261,12 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-JAVA基础-String" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-源码解读-String" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/04/27/JAVA基础-String/" class="article-date">
-      <time datetime="2018-04-27T02:50:40.000Z" itemprop="datePublished">2018-04-27</time>
+      <a href="/JAVA基础/源码解读-String/" class="article-date">
+      <time datetime="2018-05-14T04:17:07.000Z" itemprop="datePublished">2018-05-14</time>
 </a>
-
- 
-    <a href="/2018/04/27/JAVA基础-String/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count" data-thread-key="2018/04/27/JAVA基础-String/"></span>
-        
-        
-            <span class="disqus-comment-count" data-disqus-identifier="2018/04/27/JAVA基础-String/"></span>
-        
-    </a>
     </div>
   
   <div class="article-inner">
@@ -290,7 +276,7 @@
     
       <header class="article-header">
         <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/27/JAVA基础-String/">JAVA基础--String</a>
+      <a class="article-title" href="/JAVA基础/源码解读-String/">源码解读-String</a>
     </h1>
       </header>
       
@@ -298,7 +284,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"haha"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              待补充
+          
       
     </div>
     
@@ -308,8 +295,204 @@
     <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
     </div>
       <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码解读/">源码解读</a></li></ul>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/JAVA基础/源码解读-String/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Java中如何设计不可变的类？" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/JAVA基础/Java中如何设计不可变的类？/" class="article-date">
+      <time datetime="2018-04-29T02:53:23.000Z" itemprop="datePublished">2018-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/JAVA基础/Java中如何设计不可变的类？/">Java中如何设计不可变的类？</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              Java中存在很多不可变的类，他们可以在使用中天然保证线程安全，同时提高了效率，具体设计不可变的类需要遵循一些常见的准则。
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/JAVA基础/Java中如何设计不可变的类？/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Java中String为什么设计成不变的？" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/JAVA基础/Java中String为什么设计成不变的？/" class="article-date">
+      <time datetime="2018-04-28T03:32:22.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/JAVA基础/Java中String为什么设计成不变的？/">Java中String为什么设计成不可变的？</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              Java中String被设计成不变性主要考虑字符串池（效率）、安全性、hashcode、缓存等方面。
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/JAVA基础/Java中String为什么设计成不变的？/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Java中String的不变性" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/JAVA基础/Java中String的不变性/" class="article-date">
+      <time datetime="2018-04-27T02:52:40.000Z" itemprop="datePublished">2018-04-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/JAVA基础/Java中String的不变性/">Java中String的不变性</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              Java中的String不变性主要是由于创建新字符串时，先查看字符串池中是否存在，如果存在直接返回该字符串的引用，否则在字符串池中创建，并返回该引用。
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/JAVA基础/Java中String的不变性/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-JAVA基础-String" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/JAVA基础/JAVA基础-String/" class="article-date">
+      <time datetime="2018-04-26T02:50:40.000Z" itemprop="datePublished">2018-04-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/JAVA基础/JAVA基础-String/">JAVA基础--String</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              这是一个首页摘要
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/JAVA基础/JAVA基础-String/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -368,44 +551,7 @@
             }
         })
     </script>
-<script>
-            if ($(".left-col").is(":visible")) {
-                var duoshuoQuery = {short_name:""};
-                (function() {
-                    var d = document, s = d.createElement('script');
-                    s.src = 'http://static.duoshuo.com/embed.js';
-                    s.async = true; s.charset = 'UTF-8';
-                    (d.head || d.body).appendChild(s);
-                })();
 
-                $(document).ready(function(){
-                    var $duoshuoCount = $(".ds-thread-count");
-                    $duoshuoCount.bind("DOMNodeInserted", function(e) {
-                        var num = $(this).text().replace(/[^0-9]/ig,"");
-                        $(this).siblings(".count-comment").text(num);
-                        $(this).remove();
-                    })
-                })
-            }
-        </script>
-    
-
-    
-        <script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
-        <script>
-            if ($(".left-col").is(":visible")) {
-                var $disqusCount = $(".disqus-comment-count");
-                $disqusCount.bind("DOMNodeInserted", function(e) {
-                    var num = $(this).text().replace(/[^0-9]/ig,"");
-                    if (num > 0) {
-                        $(this).siblings(".count-comment").text(num);
-                    }
-                    $(this).remove();
-                })
-            } else {
-                $(".disqus-comment-count").remove();
-            }
-        </script>
 
 
     <script type="text/x-mathjax-config">

@@ -3,10 +3,10 @@
   
     
     <entry>
-      <title>JAVA基础--String</title>
-      <link href="/2018/04/27/JAVA%E5%9F%BA%E7%A1%80-String/"/>
-      <url>/2018/04/27/JAVA%E5%9F%BA%E7%A1%80-String/</url>
-      <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"haha"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <title>源码解读-String</title>
+      <link href="/JAVA%E5%9F%BA%E7%A1%80/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-String/"/>
+      <url>/JAVA%E5%9F%BA%E7%A1%80/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-String/</url>
+      <content type="html"><![CDATA[<p>##hello</p><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span></span></span><br></pre></td></tr></table></figure><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h4>]]></content>
       
       <categories>
           
@@ -17,7 +17,93 @@
       
         <tags>
             
-            <tag> JAVA </tag>
+            <tag> Java </tag>
+            
+            <tag> 源码解读 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Java中如何设计不可变的类？</title>
+      <link href="/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E7%B1%BB%EF%BC%9F/"/>
+      <url>/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%AD%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%E7%B1%BB%EF%BC%9F/</url>
+      <content type="html"><![CDATA[<blockquote><p><strong>不可变(immutable)的类：</strong>不可变的类被实例化后，实例中的属性值将不能再被改变。例如String、基本包装类型、BigDecimal、BigInteger等<br><strong>可变(mutable)的类：</strong>可变的类在被实例化后，实例中的属性值仍然可以修改。</p></blockquote><h3 id="如何设计不可变的类"><a href="#如何设计不可变的类" class="headerlink" title="如何设计不可变的类"></a>如何设计不可变的类</h3><p><strong>1.类添加final修饰符，保证类不被继承。</strong><br>将类设计成不能被继承，是为了防止子类擅自修改某个值。<br><strong>2.将所有的成员声明为私有</strong><br>设为私有后以保证不可以直接访问到成员变量，从而避免直接修改属性值。<br><strong>3.不提供setter方法</strong><br>不暴露修改属性值的方法，从而避免成员变量的值被修改。<br><strong>4.通过构造器初始化所有成员，进行深拷贝(deep copy)</strong><br>第2点中成员变量的值如果是构造函数中传过来的，存在通过修改传入对象的值从而间接的改变了成员变量的值。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ImmutableDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Object&gt; map;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    /**浅复制参数值的构造函数*/</span></span><br><span class="line"><span class="comment">//    public ImmutableDemo(HashMap&lt;String, Object&gt; map) &#123;</span></span><br><span class="line"><span class="comment">//        this.map = map;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**深度复制参数值的构造函数*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ImmutableDemo</span><span class="params">(HashMap&lt;String, Object&gt; map)</span></span>&#123;</span><br><span class="line">        HashMap deepCopyMap = <span class="keyword">new</span> HashMap();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; entry : map.entrySet())&#123;</span><br><span class="line">            deepCopyMap.put(entry.getKey(), entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.map = deepCopyMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HashMap&lt;String, Object&gt; <span class="title">getMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (HashMap&lt;String, Object&gt;) map.clone();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HashMap map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        <span class="comment">/** 未修改map里的值*/</span></span><br><span class="line">        map.put(<span class="string">"1"</span>, <span class="string">"one"</span>);</span><br><span class="line">        ImmutableDemo immutableDemo = <span class="keyword">new</span> ImmutableDemo(map);</span><br><span class="line">        System.out.println(<span class="string">"传入参数map未被修改时，里面的元素为: "</span> + immutableDemo.getMap());</span><br><span class="line">        <span class="comment">/** 修改map里的值*/</span></span><br><span class="line">        map.put(<span class="string">"2"</span>, <span class="string">"two"</span>);</span><br><span class="line">        System.out.println(<span class="string">"传入参数map被修改时，里面的元素为:   "</span> + immutableDemo.getMap());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>当构造函数为深度复制参数值的时，输出结果如下:</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">传入参数map未被修改时，里面的元素为: &#123;<span class="number">1</span>=one&#125;</span><br><span class="line">传入参数map被修改时，里面的元素为:   &#123;<span class="number">1</span>=one&#125;</span><br></pre></td></tr></table></figure><blockquote><p>当构造函数为浅复制参数值的时，输出结果如下:</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">传入参数map未被修改时，里面的元素为: &#123;<span class="number">1</span>=one&#125;</span><br><span class="line">传入参数map被修改时，里面的元素为:   &#123;<span class="number">1</span>=one, <span class="number">2</span>=two&#125;</span><br></pre></td></tr></table></figure><p><strong>5.getter方法中，不直接返回对象本身，而是克隆对象，并返回对象的拷贝</strong><br>这样做的目的是防止将成员变量外漏，防止通过getter得到的属性值改变后影响实例中的成员变量的改变。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ImmutableDemo</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HashMap map;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> HashMap <span class="title">getMap</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> map.clone();</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><strong>6.任何试图修改成员变量值的方法，都返回一个新对象，不返回原实例</strong><br>可以参考String的subString、concat等方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">concat</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> otherLen = str.length();</span><br><span class="line">    <span class="keyword">if</span> (otherLen == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = value.length;</span><br><span class="line">    <span class="keyword">char</span> buf[] = Arrays.copyOf(value, len + otherLen);</span><br><span class="line">    str.getChars(buf, len);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(buf, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="不可变的类真的就永远不可以在改变了么？"><a href="#不可变的类真的就永远不可以在改变了么？" class="headerlink" title="不可变的类真的就永远不可以在改变了么？"></a>不可变的类真的就永远不可以在改变了么？</h3><blockquote><p>答案是否定的</p></blockquote><p>通过以上分析可以知道，实现一个不可变的类主要是遵循两个准则（①：不提供任何修改成员变量值的机会， ②：如果尝试修改成员变量的值，就返回一个新的实例，而不在原来的实例中修改）。不提供修改成员变量值的方法主要是私有保护起来，我们采用反射的方法，强制修改私有属性的值，就可以达到改变不可变的实例的值。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>实现不可变的类，主要是控制实例被创建后，就不提供任何修改成员变量值的方法（从传入-构造函数、传出-getter、setter方法角度）。<br>不可变的类可以带来线程安全以及效率的好处，同时会加大创建对象的开销，有利有弊。</p>]]></content>
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Java中String为什么设计成不可变的？</title>
+      <link href="/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%ADString%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%98%E7%9A%84%EF%BC%9F/"/>
+      <url>/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%ADString%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%98%E7%9A%84%EF%BC%9F/</url>
+      <content type="html"><![CDATA[<p>String的不变性(<code>Immutable</code>)具体表现及原理可以点击<a href="/JAVA基础/Java中String的不变性">这里</a>。</p><blockquote><p>JDK中将String设计成不变(<code>Immutable</code>)的，是工程经验的精华，具体原因主要考虑一下几点：</p><ol><li>字符串常量池的需要</li><li>线程安全角度考虑</li><li>类加载时根据类的名称加载，不变性以便保证类被正确加载</li><li>支持hashcode及缓存</li></ol></blockquote><h3 id="1-字符串常量池的需要"><a href="#1-字符串常量池的需要" class="headerlink" title="1. 字符串常量池的需要"></a>1. 字符串常量池的需要</h3><p>字符串是应用程序中最为常用的类型，JVM为了提高性能和减少内存开销，提出了字符串常量池的概念。<br>字符串常量池类似于缓存区。当创建字符串常量时，首先检查常量池中是否存在改字符串，若存在直接返回该字符串的引用，如果不存在，实例化该字符串并放到字符串常量池中。</p><blockquote><p>实现字符串常量池的<code>基础</code>就要求<code>字符串是不可变的</code>，否则会数据冲突。（str1，与str2的字面量形同，则保存的引用是同一个，如果是可变的，str1的值变化会影响str2的值）<br><br></p></blockquote><h3 id="2-线程安全的考虑"><a href="#2-线程安全的考虑" class="headerlink" title="2. 线程安全的考虑"></a>2. 线程安全的考虑</h3><p>字符串常常被多个线程进行共享，如果字符串可变，那么多个线程在调用过程中可能存在线程安全问题.<br>为了解决这个问题，就需要进行线程同步，降低了效率。而字符串是不可变时，天然的具有线程安全的特性。<br><br></p><h3 id="3-类加载时根据类的名称加载，不变性以便保证类被正确加载"><a href="#3-类加载时根据类的名称加载，不变性以便保证类被正确加载" class="headerlink" title="3. 类加载时根据类的名称加载，不变性以便保证类被正确加载"></a>3. 类加载时根据类的名称加载，不变性以便保证类被正确加载</h3><p>类加载器在加载某个类（如<code>java.lang.String</code>），是根据类的全名进行查找及加载，如果这个字符串的值改变了，那么将不能正确的加载到所需要的类。<br><br></p><h3 id="4-HashCode缓存"><a href="#4-HashCode缓存" class="headerlink" title="4. HashCode缓存"></a>4. HashCode缓存</h3><p>在HashMap和HashSet数据结构中，String常用语key值.<br>String的不变性避免了hash冲突（而且也避免了空指针引用），避免了每次重新计算hashcode的成本，提升程序性能。如果String是可变的，如果HashMap中的key为String时，这个String的值变了，则在HashMap中查找发现不存在这个key的对象。</p><blockquote><p>String的源码有如下的片段,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache the hash code for the string */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">// Default to 0</span></span><br></pre></td></tr></table></figure></p></blockquote><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote><p>String被设计成不变的，主要从提升效率及安全性两个反面考虑</p><ol><li>将String设计成不变的，这样可以将字符串缓存起来，在用到的时候直接取出，避免重复创建或重新计算</li><li>String作为最常用的类型，在多线程、类启动、服务通信等都作为最基础的组成，如果在运行时字符串发生了改变将带来众多安全问题。</li></ol></blockquote><p><hr></p><blockquote><font color="#F08080" size="5">不可变类的优缺点</font><br><font color="#4682B4" size="5">优点</font><ol><li>构造、测试、使用简单，不可变对象只有一种状态，即创建时的状态</li><li>不可变对象本质是线程安全的，不需要同步处理</li><li>当用作类的属性时，不需要保护性拷贝</li><li>可以大胆的用作Map或Set的元素</li></ol><font color="#4682B4" size="5">缺点</font><p>如果对String对象的值有大量的修改需求，将会创建大量的String对象，占用更多的heap空间</p></blockquote><p><hr></p><blockquote><p><strong>tips:</strong><br>Java中不可变的类有:<code>String</code>、 <code>基本类型的包装类</code>、<code>BigInteger</code>（class没被final修饰）、<code>BigDecimal</code>（class没被final修饰）</p></blockquote><p>Java中如何设计不可变的类？可以点击<a href="/JAVA基础/Java中如何设计不可变的类？">这里</a></p>]]></content>
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Java中String的不变性</title>
+      <link href="/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%ADString%E7%9A%84%E4%B8%8D%E5%8F%98%E6%80%A7/"/>
+      <url>/JAVA%E5%9F%BA%E7%A1%80/Java%E4%B8%ADString%E7%9A%84%E4%B8%8D%E5%8F%98%E6%80%A7/</url>
+      <content type="html"><![CDATA[<h2 id="String不变性的表现"><a href="#String不变性的表现" class="headerlink" title="String不变性的表现"></a>String不变性的表现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">    String str2 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">    String str3 = <span class="string">"abc"</span>;</span><br><span class="line">    String str4 = <span class="string">"abc"</span>;</span><br><span class="line">    <span class="comment">// ①str1 == str2 :false </span></span><br><span class="line">    System.out.println(<span class="string">"str1 == str2 : "</span> + (str1 == str2));</span><br><span class="line">    <span class="comment">// ②str3 == str4 :true</span></span><br><span class="line">    System.out.println(<span class="string">"str3 == str4 : "</span> + (str3 == str4));</span><br><span class="line">    <span class="comment">// ③str1 == str3 :false</span></span><br><span class="line">    System.out.println(<span class="string">"str1 == str3 : "</span> + (str1 == str3));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>在java中<code>==</code>比较的是两个对象的地址，①、③中等号左右两边是两个不同的对象，地址也不同，返回false。</li><li>②中返回结果为true，说明等号左右两边对象的地址相同，这正是String的不变性导致的。</li></ul><h2 id="String不变性的原因"><a href="#String不变性的原因" class="headerlink" title="String不变性的原因"></a>String不变性的原因</h2><p><strong><code>str3</code>创建过程如下：</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str3 = <span class="string">"abc"</span></span><br></pre></td></tr></table></figure> <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258492575456.jpg" alt="str3的创建"><br> </div><p>此时<code>str3</code>中保存了”abc”这个对象的引用。</p><hr><p><strong><code>str4</code>创建过程如下:</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str4 = <span class="string">"abc"</span></span><br></pre></td></tr></table></figure></p><p>创建<code>str4</code>时会先到字符串常量池中找是否存在字符串为<code>&quot;abc&quot;</code>的字符串，如果字符串常量池中存在”abc”，则str4保存之前创建的字符串<code>&quot;abc&quot;</code>的引用，此时<code>str4</code>保存的引用和<code>str3</code>是同一个引用，地址相同。</p> <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258501163299.jpg" alt="str4的创建"><br> </div><p><hr><br><strong>字符串的链接</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str4 = str4.concat(<span class="string">"def"</span>);</span><br></pre></td></tr></table></figure> <div align="center"><br> <img src="http://p7vovp031.bkt.clouddn.com/15258519486092.jpg" alt="字符串的链接"><br> </div><p>当<code>str4</code>后面链接<code>&quot;def&quot;</code>时，查找字符串常量池中没有字符串<code>&quot;abcdef&quot;</code>，在字符串常量池中重新创建一个字符串<code>&quot;abcdef&quot;</code>, <code>str4</code>保存<code>&quot;abcdef&quot;</code>的引用。</p><h2 id="Java中的String为什么设计成不变的？"><a href="#Java中的String为什么设计成不变的？" class="headerlink" title="Java中的String为什么设计成不变的？"></a>Java中的String为什么设计成不变的？</h2><ul><li style="list-style: none"><input type="checkbox"> 写一篇博客详细介绍为什么这么设计</li><li style="list-style: none"><input type="checkbox"> 写一篇博客详细介绍底层怎么实现不变性的</li><li style="list-style: none"><input type="checkbox"> 补充有关不变性的面试题</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote><p>String的创建及修改过程如下:</p><ol><li>在字符串常量池中查找是否存在需要创建的字符串</li><li>如果存在，直接返回字符串的引用</li><li>如果不存在，在字符串常量池中创建新的字符串</li></ol></blockquote><p><br></p><blockquote><p><font color="red" size="4">注意:</font></p><ol><li>String中不存在修改字符串值的方法，所有的所谓的修改字符串值的方法都走一遍上面的创建或修改流程</li><li>由于修改String的值，存在着创建新的对象的可能性，会带来GC的压力，因而如果需要频繁修改字符串值的操作，尽量使用StringBuilder或StringBuffer</li></ol></blockquote>]]></content>
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>JAVA基础--String</title>
+      <link href="/JAVA%E5%9F%BA%E7%A1%80/JAVA%E5%9F%BA%E7%A1%80-String/"/>
+      <url>/JAVA%E5%9F%BA%E7%A1%80/JAVA%E5%9F%BA%E7%A1%80-String/</url>
+      <content type="html"><![CDATA[]]></content>
+      
+      <categories>
+          
+          <category> JAVA基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
             
         </tags>
       
